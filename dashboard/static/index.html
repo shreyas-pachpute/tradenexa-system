@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TRADENEXA Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <canvas id="priceChart"></canvas>
+  <script>
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    const chart = new Chart(ctx, { type: 'line', data: { labels: [], datasets: [{ label: 'Price', data: [] }] } });
+    const ws = new WebSocket('ws://localhost:8000/ws');
+    ws.onmessage = ({ data }) => {
+      const [ts, price] = data.split(',');
+      chart.data.labels.push(ts);
+      chart.data.datasets[0].data.push(parseFloat(price));
+      chart.update();  // real‑time plotting
+    };
+  </script>
+</body>
+</html>

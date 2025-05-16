@@ -1,0 +1,8 @@
+stable-baselines3[extra]    
+gymnasium                   
+numpy 
+pandas                  
+pyzmq                          
+fastapi 
+uvicorn 
+websockets    
